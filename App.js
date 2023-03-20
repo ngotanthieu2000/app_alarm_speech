@@ -1,18 +1,26 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
-
+import { useState } from 'react';
+import { ScrollView, StatusBar, StyleSheet, Text, View } from 'react-native';
+import Header from './src/components/Header/Header';
 export default function App() {
+  const [currentView, setCurrentView] = useState('taxi')
+  function handleFocusView(viewName){
+    setCurrentView(viewName)
+  };
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <ScrollView>
+      <View style={styles.container}>
+        <Header handleFocusView={handleFocusView}/>
+        <Text>{currentView}</Text>
+      </View>
+    </ScrollView>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
+    marginTop: StatusBar.currentHeight,
     flex: 1,
+    height: '100%',
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
